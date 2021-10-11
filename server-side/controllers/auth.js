@@ -44,17 +44,17 @@ export const signup = async (req, res, next) => {
     if (existingUser) return res.status(400).json({ message: "User already exist " });
     
     if (password !== passwordConfirm) return res.status(400).json({ message: "Passwords doesn't match" }); 
-    
+
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({email, password: hashedPassword, name: `${firstname} ${lastname}`})
     const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
     
-
     await sendEmail({
       email: email,
       subject: 'invest4you',
       message: 'Pozdrav \n Hvala sto si nam se pridruzio \n Marko Turic'
     });
+
     res.status(200).json({
       result,
       token,
@@ -63,13 +63,13 @@ export const signup = async (req, res, next) => {
       
     });
 
-
   } catch (error) {
+    res.status(500).json(error.message);
+
      return next(
       new AppError(error),
       500
     );
-      res.status(500).json(error.message);
     }
 };
 

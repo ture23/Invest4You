@@ -3,15 +3,18 @@ import React from 'react'
 import Container from '@material-ui/core/Container';
 // ''''''''''''''''''''''''''''''''''''''''''//
 import Chart from "react-google-charts"
+import InvestorsNews from './InvestorsNews';
+import useStyles from './styles'
+import { useSelector } from 'react-redux'
 
 
-export default function InvestorRelations(summary) {
+export default function InvestorRelations({summary, news}) {
     // const summ = useSelector((state) => state.summary)
-
-    // console.log(summ)
+    const classes = useStyles();
+    const novosti = useSelector((state) => state.news)
     return (
-        <Container>
-            <div  fontSize="small" >
+        <Container className={classes.container} >
+            <div className={classes.box} fontSize="small" >
             
                 <Chart
                     width={'600px'}
@@ -31,9 +34,10 @@ export default function InvestorRelations(summary) {
                         // sliceVisibilityThreshold: 0.2, // 20%
                     }}
                     rootProps={{ 'data-testid': '7' }}
-                />    
-            </div>    
-
+                />
+            </div>
+            
+            <InvestorsNews novosti={novosti}/>
 
 
         </Container>
