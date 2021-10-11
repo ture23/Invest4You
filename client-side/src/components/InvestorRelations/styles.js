@@ -9,9 +9,9 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
- 
-
+  },
+   news: {
+    width: '100%'
   },
   form: {
     display: 'flex',
@@ -25,5 +25,10 @@ export default makeStyles((theme) => ({
   buttonSubmit: {
     marginBottom: 10,
   },
- 
+  box: {
+    marginRight: '3%',
+    width: '60%'
+  }, container: {
+    display: 'flex'
+  }
 }));

@@ -7,6 +7,7 @@ import Form from '../Forms/form'
 
 // import useStyles from './styles';
 import { getAllCompanies } from '../../action/company';
+import {getAllNews} from '../../action/company'
 
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
@@ -41,13 +42,14 @@ const App = () => {
   useEffect(() => {
     // const user = JSON.parse(localStorage.getItem('profile'));
        
+        dispatch(getAllNews());
 
        dispatch(getAllCompanies());
       //  console.log(user.data.user.name) item xs={12} sm={6}
 
     }, [currentId, dispatch])
   return (
-    <Container className={classes.container} >
+    <Container className={classes.container}>
       <Grow in>
         <Container className={classes.container}>
           <Grid container className={classes.container} justify="space-between" alignItems="stretch" spacing={3}>
