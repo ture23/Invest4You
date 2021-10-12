@@ -4,6 +4,15 @@ This project was bootstrapped with Create React App.
 Available Scripts
 In the project directory, you can run:
 
+cd in to client-side run: 
+npm install
+npm start
+cd in to server-side run: 
+npm install 
+npm start 
+
+In api (client/src/api/api.js ) file change the baseURL to your local host of server from server-side
+
 yarn start
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
