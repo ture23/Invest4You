@@ -18,6 +18,7 @@ export default function InvestorsNews({novosti}) {
     }
     
     const user = JSON.parse(localStorage.getItem('profile'));
+    let UserStatus = user?.result?.role;
     
     const [ news, setNews ] = useState({
         title: '',
@@ -39,7 +40,7 @@ export default function InvestorsNews({novosti}) {
             
     }
     
-    if (user?.result?.role === 'user') {
+    if (UserStatus === 'user') {
         return (
             <Paper className={classes.news}>
 
@@ -48,7 +49,7 @@ export default function InvestorsNews({novosti}) {
             </Paper>
         )
     }
-    if (user?.result?.role === 'admin') {
+    if (UserStatus === 'admin') {
         return (
             <div className={classes.box}>
                 <Paper className={classes.news} >
