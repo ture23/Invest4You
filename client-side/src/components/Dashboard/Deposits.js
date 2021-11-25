@@ -28,7 +28,7 @@ export default function Deposits(companies) {
     const reducer = (accumulator, curr) => accumulator + curr;
   
   
-     summary = (array.reduce(reducer) * 0.85) - 2300
+     summary = (array.reduce(reducer) * 0.89)
     // return summarray
   })
   
