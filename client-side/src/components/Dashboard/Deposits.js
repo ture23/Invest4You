@@ -3,11 +3,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
-// import InvestorRelations from '../InvestorRelations/InvestorRelations';
+// import Chart from './Chart';
+// import { useDispatch } from 'react-redux';
+// import { createPrice } from '../../action/company'
+import { useSelector } from 'react-redux'
 
-// function preventDefault(event) {
-//   event.preventDefault();
-// }
+
+
 
 const useStyles = makeStyles({
   depositContext: {
@@ -15,31 +17,39 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits(companies) {
+export default function Deposits(companies,) {
   const classes = useStyles();
   let companyData = companies.companies
   let array = [];
-  let summary;
+  let priceArray = []
+  let summaryPrice;
+  // const dispatch = useDispatch();
+
+  const price = useSelector((state) => state.price)
   
   companyData.forEach(el => {
     let sum = el.numberOfStocks * el.currentPrice
     array.push(sum)
-    // console.log(array)
     const reducer = (accumulator, curr) => accumulator + curr;
   
   
-     summary = (array.reduce(reducer) * 0.89)
-    // return summarray
+     summaryPrice = (array.reduce(reducer) * 0.89)
   })
+
+  price.forEach(el => {
+     priceArray.push(el.price)
+   })
+  // const lastValueinPriceArray = priceArray[priceArray.length - 1]
   
-  
- 
-  console.log(summary)
+  // if (lastValueinPriceArray !== summaryPrice) {
+  //   return dispatch(createPrice(summaryPrice))
+  // }
+
   return (
     <React.Fragment>
       <Title>Trenutni Kapital</Title>
       <Typography component="p" variant="h4">
-        { summary } €
+        { summaryPrice } €
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
          24 Lip, 2021
