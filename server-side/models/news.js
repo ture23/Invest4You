@@ -9,7 +9,8 @@ const newsSchema = new mongoose.Schema({
     body: {
         type: String,
         required: true
-    }
+    },
+    creator: String,
 })
 
 

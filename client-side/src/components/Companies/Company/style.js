@@ -38,6 +38,11 @@ export default makeStyles({
   grid: {
     display: 'flex',
   },
+  view: {
+    overflow: 'auto',
+    maxLength: 12,
+    textoverflow: 'ellipsis'
+  },
   details: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -46,9 +51,20 @@ export default makeStyles({
   title: {
     padding: '0 16px',
   },
+  root: {
+    overflow: 'auto',
+    // maxHeight: '25em'
+  },
   cardActions: {
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
   },
+  ///////////////////////////////////////////////////////////
+
+  container: {
+    width: '100%',
+    // backgroundColor: 'green',
+    marginTop: '4em'
+  }
 });

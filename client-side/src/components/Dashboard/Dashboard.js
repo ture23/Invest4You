@@ -2,23 +2,13 @@ import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-// import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-// import Divider from '@material-ui/core/Divider';
-// import IconButton from '@material-ui/core/IconButton';
-// import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import NotificationsIcon from '@material-ui/icons/Notifications';
-// import { mainListItems, secondaryListItems } from './listItems';
+
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
@@ -26,7 +16,7 @@ import { useDispatch } from 'react-redux';
 
 import { useSelector } from 'react-redux'
 
-import { getAllCompanies } from '../../action/company';
+import { getAllCompanies, GetAllPrices } from '../../action/company';
 
 
 
@@ -41,6 +31,10 @@ function Copyright() {
       {'.'}
     </Typography>
   );
+}
+
+function preventDefault(event) {
+  event.preventDefault();
 }
 
 const drawerWidth = 240;
@@ -124,25 +118,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard(company) {
+export default function Dashboard( summary, price ) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [currentId, setCurrentId] = useState(0);
 
-  const companies = useSelector((state) => state.company)
-  const dispatch = useDispatch();
-
   
+  
+  
+  const companies = useSelector((state) => state.company)
+
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
  
      useEffect(() => {
         if (window.performance) {
 
-       dispatch(getAllCompanies());
+          dispatch(getAllCompanies());
+          dispatch(GetAllPrices())
         }
-    }, [currentId, dispatch,])
-  
+     }, [currentId, dispatch,])
  
-  
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
    
@@ -156,7 +153,7 @@ export default function Dashboard(company) {
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <Chart />
+                  <Chart companies={companies} />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -174,6 +171,11 @@ export default function Dashboard(company) {
                   {companies.map((company) => (
                     <Orders company={company} />
                   ))} 
+                  <div className={classes.seeMore}>
+                    <Link color="primary" href="#" onClick={preventDefault}>
+                      See more orders
+                    </Link>
+                  </div>
                 </Paper>
               </Grid>
               

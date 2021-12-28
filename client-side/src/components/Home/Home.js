@@ -7,13 +7,14 @@ import Form from '../Forms/form'
 
 // import useStyles from './styles';
 import { getAllCompanies } from '../../action/company';
-import {getAllNews} from '../../action/company'
+import {getAllNews, GetAllPrices} from '../../action/company'
 
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     container: {
     maxWidth: '100%',
-      width: '100%'
+    width: '100%',
+    marginTop:'5%'
   },
     grid: {
       maxWidth: '50%',
@@ -42,9 +43,10 @@ const App = () => {
   useEffect(() => {
     // const user = JSON.parse(localStorage.getItem('profile'));
        
-        dispatch(getAllNews());
-
-       dispatch(getAllCompanies());
+    
+    dispatch(getAllCompanies());
+    dispatch(getAllNews());
+    // dispatch(GetAllPrices());
       //  console.log(user.data.user.name) item xs={12} sm={6}
 
     }, [currentId, dispatch])

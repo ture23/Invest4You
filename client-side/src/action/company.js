@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, CREATENEWS, FETCH_ALL_NEWS } from '../actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, CREATENEWS, CREATEPRICE, FETCH_ALL_NEWS, FETCH_ALL_PRICES } from '../actionTypes';
 import * as api from '../api/api';
 
 // 
@@ -27,6 +27,18 @@ export const getAllNews = () => async (dispatch) => {
         
     }
 }
+export const GetAllPrices = () => async (dispatch) => {
+    try {
+        
+        const { data } = await api.GetAllPrices();
+
+        dispatch({ type: FETCH_ALL_PRICES, payload: data})
+ 
+    } catch (error) {
+        console.log(error.message)
+        
+    }
+}
 
 export const createCompany = (post) => async (dispatch) => {
     try {
@@ -42,6 +54,15 @@ export const createNews = (post) => async (dispatch) => {
         const { data } = await api.createNews(post);
 
         dispatch({ type: CREATENEWS, payload: data });
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const createPrice = (post) => async (dispatch) => {
+    try {
+        const { data } = await api.newPrice(post);
+
+        dispatch({ type: CREATEPRICE, payload: data });
     } catch (error) {
         console.log(error)
     }

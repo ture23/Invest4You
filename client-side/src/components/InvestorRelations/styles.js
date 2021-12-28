@@ -27,7 +27,8 @@ export default makeStyles((theme) => ({
   },
   box: {
     marginRight: '3%',
-    width: '60%'
+    width: '60%',
+    marginTop: '6em'
   }, container: {
     display: 'flex'
   }

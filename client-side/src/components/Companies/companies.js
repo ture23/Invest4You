@@ -11,7 +11,7 @@ const Companies = ({setCurrentId}) => {
     const companies = useSelector((state) => state.company)
     const classes = useStyles();
     
-    // console.log(companies);
+    console.log(companies);
     return (
         !companies.length ? <CircularProgress /> : (
             <Grid className={classes.container} direction-sm-row  container alignItems="center" spacing={6}>

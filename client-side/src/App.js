@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 
-// import Navbar from './components/Navbar/Navbar';
+import CompanyOverview from './components/Companies/Company/companyOverview';
 import Navbar2 from './components/Navbar/Navbar2';
 import Home from './components/Home/Home'
 import Auth from './components/Auth/Auth'
@@ -30,9 +30,10 @@ const App = () => {
                 <Navbar2 />
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/CompanyOverview" exact component={CompanyOverview} />
                     <Route path="/auth" exact component={Auth} />
                     <Route path="/MyAccount" exact component={Dashboard} />
-                    <Route path="/IR" exact component={InvestorRelations} />
+                    <Route path="/ir" exact component={InvestorRelations} />
                 </Switch>
                 <Footer/>
             </Container>

@@ -34,6 +34,8 @@ const  Company = ({company, setCurrentId}) =>  {
   const user = JSON.parse(localStorage.getItem('profile'));
   const dispatch = useDispatch();
   // console.log(company)
+  let viedAddres = company.address.substring(0, 15);
+  let viedDescription = company.descriptionSmall.substring(0, 52);
    const Likes = () => {
     if (company.likes.length > 0) {
       return company.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
@@ -52,9 +54,8 @@ const  Company = ({company, setCurrentId}) =>  {
   };
   const goTo = () => {window.scrollBy(0, 1500) }
 
-
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} >
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>{company.name[0]}</Avatar>
@@ -63,17 +64,21 @@ const  Company = ({company, setCurrentId}) =>  {
         
           
           (user?.result?.role === "admin") ?
-          <IconButton aria-label="settings" onClick={() => setCurrentId(company._id) }>
-            <MoreVertIcon onclick={(goTo())}/>
-            </IconButton> : <Typography />
+          <IconButton aria-label="settings" onClick={() => (setCurrentId(company._id), goTo()) }>
+            <MoreVertIcon  />
+          </IconButton>
+            : <IconButton aria-label="settings" href="/CompanyOverview"  onClick={() => setCurrentId(company._id) }>
+                  <MoreVertIcon  />
+              </IconButton>
         
         }
         title= {company.name}
         subheader={company.dateOfPurchase}
       />
-        <CardMedia className={classes.media} image={company.selectedFile} title="Paella dish" /><CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">Adresa: {company.address}</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">{company.descriptionSmall}</Typography>
+      <CardMedia className={classes.media} image={company.selectedFile} title="Paella dish" />
+      <CardContent>
+            <Typography paragraph className={classes.view} variant="body2" color="textSecondary" component="p">Adresa: {viedAddres}...</Typography>
+            <Typography maxLength={12} className={classes.view} variant="string" color="textSecondary" component="p">{viedDescription}...</Typography>
       </CardContent>
       <CardActions disableSpacing>
         <Button size="small" color="primary"  onClick={() => dispatch(likeCompany(company._id))}>

@@ -27,6 +27,7 @@ const companySchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  creator: String,
   myValuePrice: Number,
   numberOfStocks: Number,
   dateOfPurchase: String,

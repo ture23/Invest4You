@@ -47,7 +47,7 @@ export const signup = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({email, password: hashedPassword, name: `${firstname} ${lastname}`})
-    const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' });
+    const token = jwt.sign({ email: result.email, id: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     
     await sendEmail({
       email: email,
@@ -73,23 +73,7 @@ export const signup = async (req, res, next) => {
     }
 };
 
-// export const signup = async (req, res, next) => {
-//   const { email, password, passwordConfirm, firstname, lastname } = req.body;
 
-//   // const newUser = await User.create({
-//   //   name: req.body.name,
-//   //   email: req.body.email,
-//   //   password: req.body.password,
-//   //   passwordConfirm: req.body.passwordConfirm
-//   // });
-//     const result = await User.create({email, password: passwordConfirm, name: `${firstname} ${lastname}`})
-
-//   const url = `${req.protocol}://${req.get('host')}/me`;
-//   // console.log(url);
-//   await new Email(newUser, url).sendWelcome();
-
-//   createSendToken(newUser, 201, req, res);
-// };
 
 export const login = async (req, res, next) => {
    const { email, password } = req.body;
@@ -101,7 +85,7 @@ export const login = async (req, res, next) => {
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
     if (!isPasswordCorrect) return    next(new AppError('incorect credelcials', 400))
-    const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: "1h" });
+    const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     res.status(200).json({ result: existingUser, token });
   } catch (err) {
@@ -110,98 +94,12 @@ export const login = async (req, res, next) => {
 };
 
 
-// export const login = async (req, res) => {
-//   const { error } = validate(req.body);
-//   const { email, password } = req.body;
-//  if (error) return res.status(400).send(error.details[0].message);
-
-//  let user = await User.findOne({ email });
-//  if (!user) return res.status(400).send({status:400, message: "Invalid Email or Password"});
-
-//  const validPassword = await bcrypt.compare(password, user.password);
-//  if (!validPassword) return res.status(400).send({status:400, message: "Invalid Email or Password"});
-//  const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: "1h" });
-// //  const token = user.generateAuthToken();
-//  res.status(200).send({status:200, data: token, message: "User Loggedin Succesfully"});
-// };
-
-
-
-// export const login = async (req, res, next) => {
-//   const { email, password } = req.body;
-//   // console.log(result)
-
-//   // 1) Check if email and password exist
-//    const existingUser = await User.findOne({ email });
-//     console.log('ovde')
-//      if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
-//   if (!email || !password) {
-//     return next(new AppError('Please provide email and password!', 400));
-//   }
-//   // console.log('doslo do servera')
-
-//   // 2) Check if user exists && password is correct
-//   // const user =  await User.findOne({ email }).select('+password');
-//   // console.log(req.body)
-//   const correctPassword = await bcrypt.compare(password, existingUser.password)
-//   consol.log(correctPassword)
-//   if ( !correctPassword ){
-//     return next(new AppError('Incorrect email or password', 401))
-//   }
-//   console.log(password, existingUser.password)
-//   // 3) If everything ok, send token to client new AppError('Incorrect email or password', 401)
-//   createSendToken(existingUser, 200, res);
-// };
-
-// export const protect = async (req, res, next) => {
-//   // 1) Getting token and check of it's there
-//   let token;
-//   if (
-//     req.headers.authorization &&
-//     req.headers.authorization.startsWith('Bearer')
-//   ) {
-//     token = req.headers.authorization.split(' ')[1];
-//   }
-
-//   if (!token) {
-//     return next(
-//       new AppError('You are not logged in! Please log in to get access.', 401)
-//     );
-//   }
-
-
-
-//   // 2) Verification token
-//     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-//     console.log(decoded)
-//   // 3) Check if user still exists
-//   const currentUser = await User.findById(decoded.id);
-//   if (!currentUser) {
-//     return next(
-//       new AppError(
-//         'The user belonging to this token does no longer exist.',
-//         401
-//       )
-//     );
-//   }
-
-//  //   4) Check if user changed password after the token was issued
-//   if (currentUser.changedPasswordAfter(decoded.iat)) {
-//     return next(
-//       new AppError('User recently changed password! Please log in again.', 401)
-//     );
-//   }
-
-//   // GRANT ACCESS TO PROTECTED ROUTE
-//   req.user = currentUser;
-//   next();
-// };
 
 export const protect = async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(" ")[1];
+      // console.log(req.headers.authorization)
+      const token = req.headers.authorization.split(" ")[1];
       const isCustomAuth = token.length < 500; 
-      console.log(token)
 
         let decodedData;
 
@@ -216,7 +114,7 @@ export const protect = async (req, res, next) => {
         }
         next();
     } catch (error) {
-        console.log(error.message)
+        console.log(error.message, 'dovde' )
     }
 }
 
@@ -331,3 +229,108 @@ export default {
     signup,
     
 }
+
+// export const signup = async (req, res, next) => {
+//   const { email, password, passwordConfirm, firstname, lastname } = req.body;
+
+//   // const newUser = await User.create({
+//   //   name: req.body.name,
+//   //   email: req.body.email,
+//   //   password: req.body.password,
+//   //   passwordConfirm: req.body.passwordConfirm
+//   // });
+//     const result = await User.create({email, password: passwordConfirm, name: `${firstname} ${lastname}`})
+
+//   const url = `${req.protocol}://${req.get('host')}/me`;
+//   // console.log(url);
+//   await new Email(newUser, url).sendWelcome();
+
+//   createSendToken(newUser, 201, req, res);
+// };
+
+// export const login = async (req, res) => {
+//   const { error } = validate(req.body);
+//   const { email, password } = req.body;
+//  if (error) return res.status(400).send(error.details[0].message);
+
+//  let user = await User.findOne({ email });
+//  if (!user) return res.status(400).send({status:400, message: "Invalid Email or Password"});
+
+//  const validPassword = await bcrypt.compare(password, user.password);
+//  if (!validPassword) return res.status(400).send({status:400, message: "Invalid Email or Password"});
+//  const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: "1h" });
+// //  const token = user.generateAuthToken();
+//  res.status(200).send({status:200, data: token, message: "User Loggedin Succesfully"});
+// };
+
+
+
+// export const login = async (req, res, next) => {
+//   const { email, password } = req.body;
+//   // console.log(result)
+
+//   // 1) Check if email and password exist
+//    const existingUser = await User.findOne({ email });
+//     console.log('ovde')
+//      if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
+//   if (!email || !password) {
+//     return next(new AppError('Please provide email and password!', 400));
+//   }
+//   // console.log('doslo do servera')
+
+//   // 2) Check if user exists && password is correct
+//   // const user =  await User.findOne({ email }).select('+password');
+//   // console.log(req.body)
+//   const correctPassword = await bcrypt.compare(password, existingUser.password)
+//   consol.log(correctPassword)
+//   if ( !correctPassword ){
+//     return next(new AppError('Incorrect email or password', 401))
+//   }
+//   console.log(password, existingUser.password)
+//   // 3) If everything ok, send token to client new AppError('Incorrect email or password', 401)
+//   createSendToken(existingUser, 200, res);
+// };
+
+// export const protect = async (req, res, next) => {
+//   // 1) Getting token and check of it's there
+//   let token;
+//   if (
+//     req.headers.authorization &&
+//     req.headers.authorization.startsWith('Bearer')
+//   ) {
+//     token = req.headers.authorization.split(' ')[1];
+//   }
+
+//   if (!token) {
+//     return next(
+//       new AppError('You are not logged in! Please log in to get access.', 401)
+//     );
+//   }
+
+
+
+//   // 2) Verification token
+//     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//     console.log(decoded)
+//   // 3) Check if user still exists
+//   const currentUser = await User.findById(decoded.id);
+//   if (!currentUser) {
+//     return next(
+//       new AppError(
+//         'The user belonging to this token does no longer exist.',
+//         401
+//       )
+//     );
+//   }
+
+//  //   4) Check if user changed password after the token was issued
+//   if (currentUser.changedPasswordAfter(decoded.iat)) {
+//     return next(
+//       new AppError('User recently changed password! Please log in again.', 401)
+//     );
+//   }
+
+//   // GRANT ACCESS TO PROTECTED ROUTE
+//   req.user = currentUser;
+//   next();
+// };

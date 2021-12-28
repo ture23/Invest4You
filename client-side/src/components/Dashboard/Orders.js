@@ -1,6 +1,5 @@
 import React from 'react';
 // import { useDispatch } from 'react-redux';{ useEffect, useState }
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,9 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,11 +60,7 @@ const Orders = (company) => {
             </TableRow>
         </TableBody>
       </Table>´
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
+    
       
     </React.Fragment>
   );

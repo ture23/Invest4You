@@ -18,6 +18,7 @@ export default function InvestorsNews({novosti}) {
     }
     
     const user = JSON.parse(localStorage.getItem('profile'));
+    let UserStatus = user?.result?.role;
     
     const [ news, setNews ] = useState({
         title: '',
@@ -25,13 +26,13 @@ export default function InvestorsNews({novosti}) {
     })
     useEffect(() => {
     
-    
+        
         dispatch(getAllNews());
        
         
     }, [currentId, dispatch])
     
-    
+    console.log(novosti)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -39,7 +40,7 @@ export default function InvestorsNews({novosti}) {
             
     }
     
-    if (user?.result?.role === 'user') {
+    if (UserStatus === 'user') {
         return (
             <Paper className={classes.news}>
 
@@ -48,7 +49,7 @@ export default function InvestorsNews({novosti}) {
             </Paper>
         )
     }
-    if (user?.result?.role === 'admin') {
+    if (UserStatus === 'admin') {
         return (
             <div className={classes.box}>
                 <Paper className={classes.news} >
@@ -61,9 +62,11 @@ export default function InvestorsNews({novosti}) {
                     </form>
                 </Paper>
                 <Paper className={classes.news}>
-
-                    <p>{ObjNovosti.title}</p>
-                    <p>{ObjNovosti.body}</p>
+                  
+                                <p>{ObjNovosti.title}</p>
+                                <p>{ObjNovosti.body}</p> 
+                    
+                    
                 </Paper>
                 
             </div>
@@ -73,3 +76,10 @@ export default function InvestorsNews({novosti}) {
     }
     
 
+//    {
+//                     companies.map((company) => (
+//                         <Grid kay={company._id} className={classes.item} alignItems="center" direction-xs-row item xs={12} sm={6}>
+//                             <Company className={classes.item} company={company} setCurrentId={setCurrentId} /> 
+//                         </Grid>
+//                     ))
+//                 }

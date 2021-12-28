@@ -1,7 +1,7 @@
 import { CREATENEWS, FETCH_ALL_NEWS } from '../actionTypes'
 
 
- const novosti = (novosti = [], action) => {
+const novosti = (novosti = [], action) => {
      switch (action.type) {
         case FETCH_ALL_NEWS:
             return action.payload;
@@ -13,4 +13,5 @@ import { CREATENEWS, FETCH_ALL_NEWS } from '../actionTypes'
             return novosti;
     }
 }
+
 export default novosti;

@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
 
 
 //  Avatar,, Button
@@ -22,7 +23,13 @@ import decode from 'jwt-decode'
 const useStyles = makeStyles((theme) => ({
   root: {
         flexGrow: 1,
-        marginBottom: '4%'
+        marginBottom: '4%',
+        position: 'fixed',
+        zIndex: 1,
+        
+  },
+  navi: {
+    zIndex:0
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -35,7 +42,14 @@ const useStyles = makeStyles((theme) => ({
     name: {
         flexGrow: 1,
         marginLeft: '5px'
-}
+  },
+  LogIn: {
+      backgroundColor: 'hsl(134, 64%, 50%)',
+      '&:hover': {
+        backgroundColor: '#0069d9',
+        color: 'white'
+      },
+    }
   
 }));
 
@@ -74,9 +88,9 @@ export default function MenuAppBar() {
         setUser(JSON.parse(localStorage.getItem('profile')))
     }, [location])
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+  // const handleChange = (event) => {
+  //   setAuth(event.target.checked);
+  // };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -98,18 +112,12 @@ export default function MenuAppBar() {
   }
   return (
     <div className={classes.root}>
-        <FormGroup>
-            {user? ( <FormControlLabel      
-                control={<Switch checked={auth} onChange={handleChange} onClick={logOut} aria-label="login switch" />}
-                label='Logout'/> 
-              ): (
-                  <FormControlLabel      
-                    control={<Switch component={Link} to="/auth"  checked={auth} onChange={handleChange} aria-label="login switch" />}
-                    label='Login'/> 
-            )}      
+        <FormGroup className={classes.navi}>
+          
+               
            
       </FormGroup>
-        <AppBar position="static">
+        <AppBar >
             <Toolbar>
                 {user? (
                   <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -120,11 +128,13 @@ export default function MenuAppBar() {
                 <Typography name="hover-feedback" onClick={goHome} variant="h6" className={classes.title}>
                     <IconButton color="inherit" >Invest4You</IconButton>
                 </Typography>
-                {user && (
+                {!user? (
                       
-                    <div>
-                        
-                            
+                  <Button variant="contained" color="default" href="/auth" className={classes.LogIn}>
+                    Login
+                  </Button>
+                ): (
+                    <div>                           
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -137,32 +147,39 @@ export default function MenuAppBar() {
                         </IconButton>
                         
                         <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleIR}>Investor Relations</MenuItem>
-                            <MenuItem onClick={handleMyAccount} 
-                              // control={<Switch component={Link} to="/MyAccount"
-                              // checked={auth}
-                              // onChange={handleChange}
-                              // aria-label="login switch" />}
-                              >Dashboard</MenuItem>
+                              id="menu-appbar"
+                              anchorEl={anchorEl}
+                              anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                              }}
+                              keepMounted
+                              transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                              }}
+                              open={open}
+                              onClose={handleClose}
+                          >
+                          <MenuItem onClick={handleIR}>Investor Relations</MenuItem>
+                          <MenuItem onClick={handleMyAccount} 
+                                // control={<Switch component={Link} to="/MyAccount"
+                                // checked={auth}
+                                // onChange={handleChange}
+                                // aria-label="login switch" />}
+                          >Dashboard</MenuItem>
+                          <MenuItem onClick={logOut}>LogOut</MenuItem>
                         </Menu>
                     </div>
-                )}
+                  )}
             </Toolbar>
         </AppBar>
     </div>
   );
 }
+
+
+
+// <FormControlLabel      
+//                 control={<Switch checked={auth} onChange={handleChange} onClick={logOut} aria-label="login switch" />}
+//                 label='Logout'/> 
