@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
-import InvestorRelations from '../InvestorRelations/InvestorRelations';
+// import InvestorRelations from '../InvestorRelations/InvestorRelations';
 
 // function preventDefault(event) {
 //   event.preventDefault();
@@ -28,7 +28,7 @@ export default function Deposits(companies) {
     const reducer = (accumulator, curr) => accumulator + curr;
   
   
-     summary = (array.reduce(reducer) * 0.85) - 2300
+     summary = (array.reduce(reducer) * 0.89)
     // return summarray
   })
   

@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Orders = (company) => {
-
   let companyData = company.company;
  
   let Profit = companyData.numberOfStocks * companyData.currentPrice

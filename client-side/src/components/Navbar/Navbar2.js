@@ -90,7 +90,7 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   }
    const handleIR = () => {
-     history.push('/IR')
+     history.push('/ir')
      setAnchorEl(null);
   }
   const goHome = () => {

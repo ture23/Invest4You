@@ -10,7 +10,7 @@ import Company from './Company/company';
 const Companies = ({setCurrentId}) => {
     const companies = useSelector((state) => state.company)
     const classes = useStyles();
-
+    
     // console.log(companies);
     return (
         !companies.length ? <CircularProgress /> : (

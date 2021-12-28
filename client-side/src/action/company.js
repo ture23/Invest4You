@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, CREATENEWS, FETCH_ALL_NEWS } from '../actionTypes';
 import * as api from '../api/api';
 
 // 
@@ -15,6 +15,18 @@ export const getAllCompanies = () => async (dispatch) => {
         
     }
 }
+export const getAllNews = () => async (dispatch) => {
+    try {
+        
+        const { data } = await api.getAllNews();
+
+        dispatch({ type: FETCH_ALL_NEWS, payload: data})
+ 
+    } catch (error) {
+        console.log(error.message)
+        
+    }
+}
 
 export const createCompany = (post) => async (dispatch) => {
     try {
@@ -25,7 +37,15 @@ export const createCompany = (post) => async (dispatch) => {
         console.log(error)
     }
 }
+export const createNews = (post) => async (dispatch) => {
+    try {
+        const { data } = await api.createNews(post);
 
+        dispatch({ type: CREATENEWS, payload: data });
+    } catch (error) {
+        console.log(error)
+    }
+}
 export const updateCompany = (id, updateComp) => async (dispatch) => {
     try {
         // console.log(post)
