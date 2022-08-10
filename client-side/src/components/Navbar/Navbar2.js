@@ -133,7 +133,7 @@ export default function MenuAppBar() {
                             color="inherit"
                         >
                               <AccountCircle />
-                              <Typography className={classes.name} variant="h6">{user?.result?.name}</Typography>
+                              <Typography className={classes.name} variant="h6">{user.result.name}</Typography>
                         </IconButton>
                         
                         <Menu
