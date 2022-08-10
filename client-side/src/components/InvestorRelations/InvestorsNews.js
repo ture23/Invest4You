@@ -18,7 +18,7 @@ export default function InvestorsNews({novosti}) {
     }
     
     const user = JSON.parse(localStorage.getItem('profile'));
-    let UserStatus = user?.result?.role;
+    let UserStatus = user.result.role;
     
     const [ news, setNews ] = useState({
         title: '',
