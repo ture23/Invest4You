@@ -5,12 +5,17 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js'
 import AppError  from './../utils/appError.js';
 import sendEmail  from '../utils/emails.js';
+import sgMail from '@sendgrid/mail';
+
+
+
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
+
 
 const createSendToken = (result, statusCode, res) => {
   const token = signToken(result._id);
@@ -31,13 +36,14 @@ const createSendToken = (result, statusCode, res) => {
     status: 'success',
     token,
     result
-  });
+  }); 
 };
 
 export const signup = async (req, res, next) => {
   const { email, password, passwordConfirm, firstname, lastname } = req.body;
   const user = await User.findOne({ email: req.body.email });
 
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   try {
      
     const existingUser = await User.findOne({ email })
@@ -46,14 +52,33 @@ export const signup = async (req, res, next) => {
     if (password !== passwordConfirm) return res.status(400).json({ message: "Passwords doesn't match" }); 
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    const result = await User.create({email, password: hashedPassword, name: `${firstname} ${lastname}`})
+
+    const result = await User.create({ email, password: hashedPassword, name: `${firstname} ${lastname}` })
     const token = jwt.sign({ email: result.email, id: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     
-    await sendEmail({
-      email: email,
-      subject: 'invest4you',
-      message: 'Pozdrav \n Hvala sto si nam se pridruzio \n Marko Turic'
-    });
+    // await sendEmail({
+    //   email: email,
+    //   subject: 'invest4you',
+    //   message: 'Pozdrav \n Hvala sto si nam se pridruzio \n Marko Turic'
+    // });
+ 
+     const msg = {
+      to: email, // Change to your recipient
+       from:{
+                email: "tcig.invest4you@hotmail.com"
+            },  // Change to your verified sender
+      subject: 'Sending with SendGrid is Fun',
+       text: 'Hvala sto si se pridruzio InvestsForYou platformi Marko Turic ',
+      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    }
+    await sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
 
     res.status(200).json({
       result,
@@ -65,7 +90,7 @@ export const signup = async (req, res, next) => {
 
   } catch (error) {
     res.status(500).json(error.message);
-
+    
      return next(
       new AppError(error),
       500
@@ -79,10 +104,12 @@ export const login = async (req, res, next) => {
    const { email, password } = req.body;
  
   try {
-    const existingUser = await User.findOne({ email }).select('+password');
+    const existingUser = await User.findOne({ email }).select('password');
     if (!existingUser) return res.status(404).json({ message: "User doesn't exist" });
 
+    console.log(password, existingUser.password)
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
+    console.log(isPasswordCorrect, 'jel pass dobar ');
 
     if (!isPasswordCorrect) return    next(new AppError('incorect credelcials', 400))
     const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
@@ -111,10 +138,12 @@ export const protect = async (req, res, next) => {
         } else {
             decodedData = jwt.decode(token);
             req.userId = decodedData?.sub;
-        }
+      }
+      
         next();
     } catch (error) {
-        console.log(error.message, 'dovde' )
+        return next(new AppError('Please login do this action', 403));
+        // console.log(error.message, 'dovde' )
     }
 }
 
