@@ -5,7 +5,6 @@ import User from '../models/user.js'
 import Factory from './factory.js'
 
 
-mongoose.set('useFindAndModify', false);
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
