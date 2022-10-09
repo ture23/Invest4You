@@ -14,10 +14,19 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-export const getMe = (req, res, next) => {
-    console.log(req.user._id)
-    req.params.id = req.user._id;
-  next();
+// export const getMe = (req, res, next) => {
+    
+//   req.params.id = req.user._id;
+//    User.findById(req.params.id)
+//   next();
+// };
+export const getMe = async (req, res, next) => {
+  const user =  await User.findById(req.params._id);
+
+  res.status(204).json({
+    status: 'success',
+    data: user
+  });
 };
 
 export const updateMe = async (req, res, next) => {

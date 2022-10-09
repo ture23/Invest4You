@@ -24,7 +24,7 @@ const updateOne = Model =>
       new: true,
       runValidators: true
     });
-    console.log('doc.address')
+    console.log('update one')
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
@@ -39,7 +39,9 @@ const updateOne = Model =>
 
 const createOne = Model =>
   async (req, res, next) => {
-    const doc = await Model.create(req.body);
+    // const file = req.body;
+    // const creator = {creator: req.serId}
+     const doc = await Model.create(req.body);
 
     res.status(201).json(doc);
   };

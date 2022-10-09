@@ -10,7 +10,7 @@ router.post('/signup', signup);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 
-router.use(protect);
+// router.use(protect);
 
 router.patch('/updateMyPassword', updatePassword);
 router.get('/me', getMe, getUser);
@@ -19,9 +19,9 @@ router.delete('/deleteMe', deleteMe);
 
 
 
-router.use(restrictTo('admin'));
+// router.use(restrictTo('admin'));
 
-router.get('/',  getAllUsers);
+router.get('/all',  getAllUsers);
 router.get('/:id', getUser)
 // router.post('/', createUser);
 router.patch('/:id', updateUser);
