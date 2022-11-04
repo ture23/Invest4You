@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const API = axios.create({ baseURL: 'http://localhost:5000'});
+const API = axios.create({ baseURL: 'http://204.48.31.223:5000'});
 
 // ' /  http://localhost:5000 https://invest-for-you.herokuapp.com/
 
