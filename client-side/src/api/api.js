@@ -21,11 +21,19 @@ export const updateCompany = (id, updateComp) => API.patch(`/api/v1/companies/${
 export const deleteCompany = (id) => API.delete(`/api/v1/companies/${id}`);
 export const likeCompany = (id) => API.patch(`/api/v1/companies/${id}/likeCompany`);
 ///////////////////////////////////////////////////////7
-export const getAllNews = () => API.get('api/v1/companies/ir');
-export const createNews = (newNews) => API.post('api/v1/companies/ir', newNews);
+export const getAllNews = () => API.get('/api/v1/companies/ir');
+export const createNews = (newNews) => API.post('/api/v1/companies/ir', newNews);
 
-// trebas da implementujes like opciju 
+// trebas da implementujes frogot password cijeli put i da promjenis password 
 
+export const forgotPassword = formData => API.post('/api/v1/users/forgotPassword', formData)
+export const singin = (formData) => API.post('/api/v1/users/login', formData);
+export const signup = (formData) => API.post('/api/v1/users/signup', formData);
+export const getAllUsers = () => API.get('/api/v1/users/all');
+// export const getUser = (id) => API.get(`api/v1/users/${id}`);
+export const getMe = () => API.get('/api/v1/users/me');
+export const updateUser = (id, formData) => API.patch(`/api/v1/users/${id}`, formData);
+export const deleteUser = (id) => API.delete(`/api/v1/users/${id}`);
+export const updateMe = (id, formData) => API.patch(`/api/v1/users/me/${id}`, formData);
+export const deleteMe = (id) => API.delete(`/api/v1/users/me/${id}`);
 
-export const singin = (formData) => API.post('api/v1/users/login', formData);
-export const signup = (formData) => API.post('api/v1/users/signup', formData);
