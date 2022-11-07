@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 
-const API = axios.create({ baseURL: 'http://204.48.31.223:5000'});
+const API = axios.create({
+  baseURL: 'http://localhost:5000'
+});
 
 // ' /  http://localhost:5000 https://invest-for-you.herokuapp.com/
 
@@ -36,4 +38,3 @@ export const updateUser = (id, formData) => API.patch(`/api/v1/users/${id}`, for
 export const deleteUser = (id) => API.delete(`/api/v1/users/${id}`);
 export const updateMe = (id, formData) => API.patch(`/api/v1/users/me/${id}`, formData);
 export const deleteMe = (id) => API.delete(`/api/v1/users/me/${id}`);
-
