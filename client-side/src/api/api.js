@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: 'http://www.invest-server.de:8080'
 });
 
 // ' /  http://localhost:5000 https://invest-for-you.herokuapp.com/
