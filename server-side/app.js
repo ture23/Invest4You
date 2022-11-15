@@ -6,11 +6,11 @@ import helmet  from 'helmet';
 import mongoSanitize  from 'express-mongo-sanitize';
 import xss  from 'xss-clean';
 import hpp from 'hpp';
+import path  from 'path'
 
 import AppError from './utils/appError.js';
 import companyRouter from './routs/company.js'
 import userRouter from './routs/user.js'
-// import globalErrorHandler  from './controllers/errorController.js';
 
 
 const app = express();
@@ -37,7 +37,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Body parser, reading data from body into req.body
-app.use(express.json({ limit: '50kb' }));
+app.use(express.json({ limit: '250kb' }));
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
@@ -61,12 +61,16 @@ app.use((req, res, next) => {
   // console.log(req.headers);
   next();
 });
+// app.use(express.static(path.resolve('../client/build')));
 
+// app.get('*', (req, res) => {
+//   res.sendFile(path.resolve('../client/build', 'index.html'));
+// });
 // // 3) ROUTES
 app.use('/api/v1/companies', companyRouter);
 app.use('/api/v1/users', userRouter);
 app.get('/', (req, res) => {
-  res.send('Heloo ti Invest4You');
+  res.send('Heloo ti Invest4You doslo je dop app.js');
 } )
 // app.use('/api/v1/reviews', reviewRouter);
 

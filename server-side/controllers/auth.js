@@ -209,10 +209,10 @@ export const protect = async (req, res, next) => {
           decodedData = jwt.verify(token, process.env.JWT_SECRET);
           console.log(decodedData)
 
-            req.userId = decodedData?.id
+            req.userId = decodedData.id
         } else {
             decodedData = jwt.decode(token);
-            req.userId = decodedData?.sub;
+            req.userId = decodedData.sub;
         }
         next();
     } catch (error) {

@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import app from './app.js';
+import http from 'http'
+import https from 'https';
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -11,22 +13,26 @@ process.on('uncaughtException', err => {
 dotenv.config();
 
 
+// var http = require('http') , https = require('https') , express = require('express') , app = express();
+
+
+
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
-);
-// const DB = 'mongodb+srv://Marko:marko1234@cluster0.cfldf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-mongoose
+  );
+  // const DB = 'mongodb+srv://Marko:marko1234@cluster0.cfldf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  mongoose
   .connect(DB, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
     useUnifiedTopology: true
   })
   .then(() => console.log('DB connection successful!'));
-
-const port = process.env.PORT || 5000;
-const server = app.listen(port, () => {
+  
+  var server = http.createServer(app).listen(8080);
+  // server = https.createServer(app).listen(5050);
+  const port = process.env.PORT || 5000;
+  server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
 
