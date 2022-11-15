@@ -1,9 +1,7 @@
 import axios from 'axios'
 
 
-const API = axios.create({
-  baseURL: 'http://www.invest-server.de:8080'
-});
+const API = axios.create({ baseURL: 'http://localhost:5000'});
 
 // ' /  http://localhost:5000 https://invest-for-you.herokuapp.com/
 
@@ -32,9 +30,10 @@ export const forgotPassword = formData => API.post('/api/v1/users/forgotPassword
 export const singin = (formData) => API.post('/api/v1/users/login', formData);
 export const signup = (formData) => API.post('/api/v1/users/signup', formData);
 export const getAllUsers = () => API.get('/api/v1/users/all');
-// export const getUser = (id) => API.get(`api/v1/users/${id}`);
+export const getUser = (id) => API.get(`api/v1/users/${id}`);
 export const getMe = () => API.get('/api/v1/users/me');
 export const updateUser = (id, formData) => API.patch(`/api/v1/users/${id}`, formData);
 export const deleteUser = (id) => API.delete(`/api/v1/users/${id}`);
 export const updateMe = (id, formData) => API.patch(`/api/v1/users/me/${id}`, formData);
 export const deleteMe = (id) => API.delete(`/api/v1/users/me/${id}`);
+

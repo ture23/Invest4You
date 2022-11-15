@@ -38,25 +38,25 @@ const Orders = (company) => {
   return (
     <React.Fragment>
       <Table size="small">
-        <TableHead align="center">
+        {/* <TableHead align="center">
           <TableRow>
             <TableCell>Date of purchase</TableCell>
             <TableCell>Company</TableCell>
             <TableCell>Stocks</TableCell>
             <TableCell>Price of purchase</TableCell>
             <TableCell>Current price</TableCell>
-            <TableCell align="right">Profit(+-)</TableCell>
+            <TableCell align="right">Value</TableCell>
           </TableRow>
-        </TableHead>
+        </TableHead> */}
         <TableBody  >
             <TableRow key={companyData.id} width='25%'>
               {/* <Company className={classes.item} company={company} >Date</Company> */}
-              <TableCell  >{companyData.dateOfPurchase}</TableCell>
-              <TableCell width='25%'>{companyData.name}</TableCell>
-              <TableCell width='25%'>{companyData.numberOfStocks} </TableCell>
-              <TableCell width='25%'>{companyData.bothPrice} $</TableCell>
-              <TableCell width='25%'>{companyData.currentPrice} $</TableCell>
-              <TableCell width='25%' align="right">{Profit} $</TableCell>
+              <TableCell width='19%'  >{companyData.dateOfPurchase}</TableCell>
+              <TableCell width='19%'>{companyData.name}</TableCell>
+              <TableCell width='19%'>{companyData.numberOfStocks} </TableCell>
+              <TableCell width='19%'>{companyData.bothPrice} $</TableCell>
+              <TableCell width='15%'>{companyData.currentPrice} $</TableCell>
+              <TableCell width='19%' align="right" >{Profit} $</TableCell>
             </TableRow>
         </TableBody>
       </Table>´

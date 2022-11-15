@@ -6,8 +6,7 @@ import Companies from '../Companies/companies'
 import Form from '../Forms/form'
 
 // import useStyles from './styles';
-import { getAllCompanies } from '../../action/company';
-import {getAllNews, GetAllPrices} from '../../action/company'
+import { getAllCompanies, getAllNews, GetAllPrices, } from '../../action/company';
 
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
@@ -47,9 +46,10 @@ const App = () => {
     dispatch(getAllCompanies());
     dispatch(getAllNews());
     // dispatch(GetAllPrices());
+    // dispatch(getUser(user.result.id));
       //  console.log(user.data.user.name) item xs={12} sm={6}
 
-    }, [currentId, dispatch])
+    }, [currentId, dispatch]);
   return (
     <Container className={classes.container}>
       <Grow in>

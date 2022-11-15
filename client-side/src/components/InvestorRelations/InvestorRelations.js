@@ -8,10 +8,17 @@ import useStyles from './styles'
 import { useSelector } from 'react-redux'
 
 
-export default function InvestorRelations({summary, news}) {
+export default function InvestorRelations({summary}) {
     // const summ = useSelector((state) => state.summary)
     const classes = useStyles();
     const novosti = useSelector((state) => state.news)
+    function getData(data) {
+        return data.map(item => {
+            return [item.title, item.url]
+        })
+    }
+    // unit test
+    
     return (
         <Container className={classes.container} >
             <div className={classes.box} fontSize="small" >
@@ -23,11 +30,13 @@ export default function InvestorRelations({summary, news}) {
                     loader={<div>Loading Chart</div>}
                     data={[
                         ['Ivestitor', 'Postotak ulaganja'],
-                        ['Marko Olivera Turic', 1000],
-                        ['Franjo Dujo', 1000],
-                        ['Nikola Marina Vukovic', 1000],
-                        ['Goran Terezija Grebenar', 1000], // Below limit.
-                        ['Marko Ivana Matosevic', 1000], // Below limit.
+                        ['Marko Olivera Turic', 3607],
+                        ['Franjo Dujo', 724],
+                        ['Nikola Marina Vukovic', 724],
+                        ['Goran Terezija Grebenar', 724], // Below limit.
+                        ['Marko Ivana Matosevic', 5928], // Below limit.
+                        ['Mario Biljaka', 682], // Below limit.
+                        ['Josip Vukovic', 910], // Below limit.
                     ]}
                     options={{
                         title: 'Udio Investitora',

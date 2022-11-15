@@ -14,9 +14,17 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import { useDispatch } from 'react-redux';
 
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
+
+
+
 import { useSelector } from 'react-redux'
 
 import { getAllCompanies, GetAllPrices } from '../../action/company';
+import InvestorRelations from '../InvestorRelations/InvestorRelations';
 
 
 
@@ -116,6 +124,9 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  invR: {
+    display: 'none'
+  }
 }));
 
 export default function Dashboard( summary, price ) {
@@ -127,7 +138,7 @@ export default function Dashboard( summary, price ) {
   
   
   const companies = useSelector((state) => state.company)
-
+  console.log(companies);
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
  
@@ -167,10 +178,23 @@ export default function Dashboard( summary, price ) {
               {/* Recent Orders */}
               
               <Grid item xs={12}>
-                <Paper className={classes.paper}> Current Portfolio
+                <Paper className={classes.paper}>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell width='20%' >Date of purchase</TableCell>
+                        <TableCell width='20%'>Company</TableCell>
+                        <TableCell width='20%' >Stocks</TableCell>
+                        <TableCell width='20%' >Price of purchase</TableCell>
+                        <TableCell width='20%' >Current price</TableCell>
+                        <TableCell width='20%'  align="right">Value</TableCell>
+                      </TableRow>
+                  </TableHead>
+                  <TableBody>
+                  Current Portfolio
                   {companies.map((company) => (
                     <Orders company={company} />
-                  ))} 
+                  ))}
+                  </TableBody>
                   <div className={classes.seeMore}>
                     <Link color="primary" href="#" onClick={preventDefault}>
                       See more orders
@@ -186,7 +210,8 @@ export default function Dashboard( summary, price ) {
           </Container>
         </main>
       </div>) : (
-            <Paper className={classes.paper} variant="outlined">
+          <Paper className={classes.paper} variant="outlined">
+            <InvestorRelations className={classes.invR} companies={companies} />
                 <Typography variant="h6" align="center" >
                     Please Sing In to see more!!!!
                 </Typography>

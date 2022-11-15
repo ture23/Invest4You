@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits(companies,) {
+export default function Deposits(companies) {
   const classes = useStyles();
   let companyData = companies.companies
   let array = [];

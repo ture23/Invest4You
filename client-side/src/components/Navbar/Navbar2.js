@@ -1,24 +1,18 @@
 import React, { useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
+
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
 
 
-//  Avatar,, Button
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import decode from 'jwt-decode'
-// import DropDownMenu from '../Dashboard/DropDownMenu'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,6 +101,18 @@ export default function MenuAppBar() {
      history.push('/ir')
      setAnchorEl(null);
   }
+  const getMe = () => {
+    history.push('/Me');
+    setAnchorEl(null);
+
+  }
+  const allUsers = () => {
+    history.push('/Users');
+    setAnchorEl(null);
+  }
+
+    
+ 
   const goHome = () => {
     history.push('/')
   }
@@ -161,6 +167,8 @@ export default function MenuAppBar() {
                               open={open}
                               onClose={handleClose}
                           >
+                          <MenuItem onClick={getMe}>My Account</MenuItem>
+                          <MenuItem onClick={allUsers}>All Users</MenuItem>
                           <MenuItem onClick={handleIR}>Investor Relations</MenuItem>
                           <MenuItem onClick={handleMyAccount} 
                                 // control={<Switch component={Link} to="/MyAccount"

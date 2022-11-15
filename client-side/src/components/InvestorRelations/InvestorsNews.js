@@ -32,7 +32,6 @@ export default function InvestorsNews({novosti}) {
         
     }, [currentId, dispatch])
     
-    console.log(novosti)
 
     const handleSubmit = (e) => {
         e.preventDefault()

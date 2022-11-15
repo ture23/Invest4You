@@ -30,7 +30,6 @@ const Form = ({currentId, setCurrentId }) => {
         if (company) setcompanytData(company);
     }, [company])
     //  createPost({...postData, name: user?.result?.name}) updatePost(currentId, {...postData, name: user?.result?.name})
-    console.log(copanytData)
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId === 0) {

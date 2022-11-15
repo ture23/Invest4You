@@ -16,6 +16,7 @@ const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
     const [isSingUp, setIsSingUp] = useState(false);
+    // const [isPassForgot, setPassForgot] = useState();
     const dispatch = useDispatch();
     const history = useHistory()
     const [formData, setFormData] = useState(initialState);
@@ -31,6 +32,7 @@ const Auth = () => {
             
         }
         history.push('/')
+
     }
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -39,6 +41,9 @@ const Auth = () => {
     const switchMode = () => {
         setIsSingUp((prevIsSingUp) => !prevIsSingUp);
         setShowPassword(false);
+    }
+     const switchTOFOrgotPass = () => {
+       history.push('/forgotPassword')
     }
 
     const googleFailure = (error) => {
@@ -106,6 +111,9 @@ const Auth = () => {
                             <Button onClick={switchMode}>
                                 {isSingUp ? 'Have Account!!! Log In ' : 'Don\'t have Account!!! Sing Up'}
                             </Button>
+                            {/* <Button onClick={switchTOFOrgotPass}>
+                                {isPassForgot ?'Don\'t have Account!!! Sing Up' : 'Forgot My Password'}
+                            </Button> */}
                         </Grid>
                     </Grid>
                 </form>
