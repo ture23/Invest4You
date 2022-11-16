@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const API = axios.create({ baseURL: 'https://invest-for-you.herokuapp.com'});
+const API = axios.create({ baseURL: 'http://invest-server.de:5000'});
 
 // ' /  http://localhost:5000 https://invest-for-you.herokuapp.com/
 
