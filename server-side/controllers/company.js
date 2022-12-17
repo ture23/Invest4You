@@ -31,11 +31,24 @@ export const likeCompany = async (req, res) => {
     
 
 }
+export const createCompany = async (req, res) => {
+    const company = req.body;
+
+    const newCompany = new Company({ ...company, creator: req.userId, createdAt: new Date().toISOString() })
+
+    try {
+        await newCompany.save();
+
+        res.status(201).json(newCompany );
+    } catch (error) {
+        res.status(409).json({ message: error.message });
+    }
+}
 
 
 export const getAllCompanies = Factory.getAll(Company);
 export const getOneCompany = Factory.getOne(Company);
-export const createCompany = Factory.createOne(Company);
+// export const createCompany = Factory.createOne(Company);
 export const updateCompany = Factory.updateOne(Company);
 export const deleteCompany = Factory.deleteOne(Company);
 

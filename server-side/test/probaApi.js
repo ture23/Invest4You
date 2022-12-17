@@ -1,18 +1,27 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app.js';
-var should = chai.should();
 
-var expect = chai.expect;
+// chai.should();
 chai.use(chaiHttp)
+// var expect = chai.expect;
+describe('Test API', () => {
+    describe('get-api', () => {
+        it('get all data', (done) => {
+            chai.request(app)
+                .get('/api/v1/companies')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');                 
+                    
+                })
+                done();
+        })
 
+      
+    })
 
-
-
-
-
-    // testiranje getAllCompanies
-    describe('get-api with ID AllCompanies', () => {
+    describe('get-api with ID', () => {
         it('get all data with id', (done) => {
             chai.request(app)
                 .get('/api/v1/companies/:id')
@@ -25,125 +34,24 @@ chai.use(chaiHttp)
                     
                 })
             done();
-
         })
     })
-
-
-    // testiranje getAllUsers
-    describe('get-api with ID AllUsers', () => {
-        it('get all data with id', (done) => {
-            chai.request(app)
-                .get('/api/v1/users/:id')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('_id');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('email');
-                    res.body.should.have.property('password');
-                    res.body.should.have.property('role');
-                    
-                })
-            done();
-
-        })
-    })
-
-
-
-    //testiranje post metode
-    describe('post-api', () => {
-        it('post data', (done) => {
-            chai.request(app)
-                .post('/api/v1/companies')
-                .send({
-                    name: 'test',
-                    likes: 1
-                })
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('likes');
-                    res.body.should.have.property('_id');
-                })
-            done();
-        })
-    })
-   
-
-    //testiranje delete metode
-    describe('delete-api', () => {
-        it('delete data', (done) => {
-            chai.request(app)
-                .delete('/api/v1/companies/:id')
-                .send({
-                    name: 'test',
-                    likes: 1
-                })
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('likes');
-                    res.body.should.have.property('_id');
-                })
-            done();
-        })
-    })
-
-
-
-    // test singUp metode
-
-describe('POST /api/v1/auth/signup', () => {
-    it('it should singup user', (done) => {
-        let user = {
-            name: "test",
-            email: "email@com",
-            password: "test",
-            password2: "test"
-    }
-        chai.request(app)
-            .post('/api/v1/users/signup')
-            .send(user)
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.body.should.have.property('name');
-                res.body.should.have.property('email');
-                res.body.should.have.property('password');
-                res.body.should.have.property('password2');
-                res.body.should.have.property('token');
+    describe('get API of A Users ', () => {
+        it('get all Usersdata', (done) => {
+                chai.request(app)
+                    .get('/api/v1/users')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');                 
+                        
+                    })
+                done();
             })
-        done();
-})
-} )
-    
-
-    // test login metode
-
-    describe('POST /api/v1/auth/login', () => {
-        it('it should login user', (done) => {
-            let user = {
-                email: "email@com",
-                password: "test"
-            }
-            chai.request(app)
-                .post('/api/v1/users/login')
-                .send(user)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('email');
-                    res.body.should.have.property('password');
-                    res.body.should.have.property('token');
-                })
-            done();
-        })
     })
 
-        
-        
+
+
+
+});
+
+   
