@@ -8,6 +8,7 @@ const companySchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  sticker: String,
   slug: String,
   address: {
     type: String,
