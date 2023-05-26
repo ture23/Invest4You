@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { TableRow, TableCell, Button } from '@mui/material'
 import Collapse from '@mui/material/Collapse'
 import TextField from '@mui/material/TextField'
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/core/Box';
 import {updateUser, } from '../../action/user'
 import { useDispatch } from 'react-redux';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@mui/material/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 

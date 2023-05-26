@@ -1,6 +1,6 @@
 import React from 'react'
 // '''''''''''''''''''''''''''''''''''''''''//
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/core/Container';
 // ''''''''''''''''''''''''''''''''''''''''''//
 import Chart from "react-google-charts"
 import InvestorsNews from './InvestorsNews';

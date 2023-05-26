@@ -1,13 +1,12 @@
 import AppError  from '../utils/appError';
 
-export export const handleCastErrorDB = err => {
+export  const handleCastErrorDB = err => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new AppError(message, 400);
 };
 
 export const handleDuplicateFieldsDB = err => {
   const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-  console.log(value);
 
   const message = `Duplicate field value: ${value}. Please use another value!`;
   return new AppError(message, 400);
@@ -23,7 +22,7 @@ export const handleValidationErrorDB = err => {
 export const handleJWTError = () =>
   new AppError('Invalid token. Please log in again!', 401);
  
-export export const handleJWTExpiredError = () =>
+export const handleJWTExpiredError = () =>
   new AppError('Your token has expired! Please log in again.', 401);
 
 export const sendErrorDev = (err, res) => {

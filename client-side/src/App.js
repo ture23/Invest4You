@@ -15,7 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import InvestorRelations from './components/InvestorRelations/InvestorRelations';
 import UserProfile from './components/User/UserProfile';
 import AllUsers from './components/User/AllUsers';
-import { getAllUsers, getMe } from './action/user';
+import { getAllUsers } from './action/user';
 
 
 const useStyles = makeStyles((theme) => ({

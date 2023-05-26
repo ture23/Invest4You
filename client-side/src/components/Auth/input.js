@@ -1,8 +1,8 @@
 import React from 'react'
-import { TextField, Grid, InputAdornment, IconButton } from '@material-ui/core'
+import { TextField, Grid, InputAdornment, IconButton } from '@mui/material/core'
 
-import Visibility from '@material-ui/icons/Visibility'
-import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import Visibility from '@mui/material/icons/Visibility'
+import VisibilityOff from '@mui/material/icons/VisibilityOff'
 
 const Input = ({half,handleChange, handelShowPassword, name, label, autoFocus, type}) => {
     return (

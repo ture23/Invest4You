@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import User from './User';
 import { useSelector } from 'react-redux';
 
-import Container from '@material-ui/core/Container';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Box from '@material-ui/core/Box';
+import Container from '@mui/material/core/Container';
+import Table from '@mui/material/core/Table';
+import TableBody from '@mui/material/core/TableBody';
+import TableCell from '@mui/material/core/TableCell';
+import TableHead from '@mui/material/core/TableHead';
+import TableRow from '@mui/material/core/TableRow';
+import Box from '@mui/material/core/Box';
 
 
 // napraviti da za svakog usera mozes mjenjati kapital 

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 
 
-import { Container, Typography, CardMedia } from '@material-ui/core';
+import { Container, Typography, CardMedia } from '@mui/material/core';
 import useStyles from './style';
 
 

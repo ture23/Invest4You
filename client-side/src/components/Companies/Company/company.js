@@ -1,26 +1,26 @@
 import React from 'react';
 import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Card from '@mui/material/core/Card';
+import CardHeader from '@mui/material/core/CardHeader';
+import CardMedia from '@mui/material/core/CardMedia';
+import CardContent from '@mui/material/core/CardContent';
+import CardActions from '@mui/material/core/CardActions';
+import Collapse from '@mui/material/core/Collapse';
+import Avatar from '@mui/material/core/Avatar';
+import IconButton from '@mui/material/core/IconButton';
+import Typography from '@mui/material/core/Typography';
+// import FavoriteIcon from '@mui/material/icons/Favorite';
+import ShareIcon from '@mui/material/icons/Share';
+import ExpandMoreIcon from '@mui/material/icons/ExpandMore';
+import MoreVertIcon from '@mui/material/icons/MoreVert';
 import useStyles from './style';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
-import { Button} from '@material-ui/core/';
+import ThumbUpAltIcon from '@mui/material/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@mui/material/icons/ThumbUpAltOutlined';
+import { Button} from '@mui/material/core/';
 
 
 
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@mui/material/icons/Delete';
 
 import { useDispatch } from 'react-redux';
 

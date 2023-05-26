@@ -48,13 +48,13 @@ export const signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({email, password: hashedPassword, name: `${firstname} ${lastname}`})
     const token = jwt.sign({ email: result.email, id: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    
+    console.log('prije maila')
     await sendEmail({
+      firstname: firstname,
+      lastname: lastname,
       email: email,
-      subject: 'invest4you',
-      message: 'Pozdrav \n Hvala sto si nam se pridruzio \n Marko Turic'
     });
-
+    console.log('poslije maila')
     res.status(200).json({
       result,
       token,
@@ -96,6 +96,7 @@ export const login = async (req, res, next) => {
 
 
 export const protect = async (req, res, next) => {
+  const  authorization  = req;
     try {
       const token = req.headers.authorization.split(" ")[1];
       const isCustomAuth = token.length < 500; 
@@ -110,7 +111,6 @@ export const protect = async (req, res, next) => {
             decodedData = jwt.decode(token);
             req.userId = decodedData?.sub;
       }
-      console.log(token, isCustomAuth)
         next();
     } catch (error) {
         console.log(error.message, 'jwt neradi controler auth' )
@@ -134,7 +134,6 @@ export const restrictTo = (...roles) => {
 export const forgotPassword = async (req, res, next) => {
   // 1) Get user based on POSTed email
     const user = await User.findOne({ email: req.body.email });
-    console.log(user.email)
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
   }

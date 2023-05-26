@@ -1,15 +1,15 @@
 import React, { useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/material/core/styles';
 
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Button from '@material-ui/core/Button';
+import IconButton from '@mui/material/core/IconButton';
+import AccountCircle from '@mui/material/icons/AccountCircle';
+import FormGroup from '@mui/material/core/FormGroup';
+import MenuItem from '@mui/material/core/MenuItem';
+import Menu from '@mui/material/core/Menu';
+import Button from '@mui/material/core/Button';
 
 
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@mui/material/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import decode from 'jwt-decode'

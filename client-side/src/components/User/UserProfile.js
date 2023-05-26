@@ -2,9 +2,9 @@ import React from 'react';
 import useStyles from './styles';
 
 import EditIcon from '@mui/icons-material/Edit';
-import Container from '@material-ui/core/Container';
+import Container from '@mui/material/core/Container';
 import Avatar from '@mui/material/Avatar';
-import {Button, Box, Typography, TextField, Paper } from '@material-ui/core'
+import {Button, Box, Typography, TextField, Paper } from '@mui/material/core'
 
 // html template for the CurrentUser profile page
 export default function UserProfile({ user }) {

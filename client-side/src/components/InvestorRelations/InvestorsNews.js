@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {Button, TextField, Paper } from '@material-ui/core'
+import {Button, TextField, Paper } from '@mui/material/core'
 import useStyles from './styles'
 import  {createNews} from '../../action/company'
 import { useDispatch } from 'react-redux'

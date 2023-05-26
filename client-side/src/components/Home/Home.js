@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Typography, Grow, Grid } from '@material-ui/core';
+import { Container, Typography, Grow, Grid } from '@mui/material/core';
 
 import Companies from '../Companies/companies'
 import Form from '../Forms/form'
@@ -8,7 +8,7 @@ import Form from '../Forms/form'
 // import useStyles from './styles';
 import { getAllCompanies, getAllNews, GetAllPrices, } from '../../action/company';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/material/core/styles';
 const useStyles = makeStyles((theme) => ({
     container: {
     maxWidth: '100%',

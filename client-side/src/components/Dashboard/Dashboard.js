@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@mui/material/core/styles';
+import CssBaseline from '@mui/material/core/CssBaseline';
+import Box from '@mui/material/core/Box';
+import Typography from '@mui/material/core/Typography';
+import Container from '@mui/material/core/Container';
+import Grid from '@mui/material/core/Grid';
+import Paper from '@mui/material/core/Paper';
+import Link from '@mui/material/core/Link';
 
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import { useDispatch } from 'react-redux';
 
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@mui/material/core/TableCell';
+import TableHead from '@mui/material/core/TableHead';
+import TableRow from '@mui/material/core/TableRow';
+import TableBody from '@mui/material/core/TableBody';
 
 
 
