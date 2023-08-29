@@ -48,13 +48,11 @@ export const signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({email, password: hashedPassword, name: `${firstname} ${lastname}`})
     const token = jwt.sign({ email: result.email, id: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    console.log('prije maila')
     await sendEmail({
       firstname: firstname,
       lastname: lastname,
       email: email,
     });
-    console.log('poslije maila')
     res.status(200).json({
       result,
       token,
